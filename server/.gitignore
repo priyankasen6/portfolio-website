@@ -1,0 +1,10 @@
+# Node dependencies
+server/node_modules/
+
+# Environment variables
+server/.env
+
+# OS / Editor files
+.vscode/
+.DS_Store
+Thumbs.db
