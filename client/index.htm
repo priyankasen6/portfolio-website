@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Priyanka Sen | Portfolio</title>
+  <style>
+    :root {
+      --bg-light: #f9f9fb;
+      --text-light: #1f1f1f;
+      --primary: #6c63ff;
+      --secondary: #b366ff;
+      --accent: #8588df;
+      --card-bg: #ffffff;
+      --nav-bg: rgba(210, 228, 245, 0.85);
+      --shadow: rgba(0,0,0,0.1);
+
+      --bg-dark: #0e0e12;
+      --text-dark: #f5f5f5;
+      --card-dark: #1d1d25;
+    }
+
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.4s, color 0.4s;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 0.8em 2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.6em;
+      letter-spacing: 1px;
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5em;
+      align-items: center;
+    }
+
+    nav a {
+      position: relative;
+      color: rgb(21, 20, 20);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after,
+    nav a.active::after { width: 100%; }
+
+    nav a.active { color: var(--accent); }
+
+    #theme-toggle {
+      background: var(--accent);
+      border: none;
+      color: white;
+      padding: 0.4em 0.8em;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.3s;
+    }
+    #theme-toggle:hover { background: var(--secondary); }
+
+    #hero {
+      height: 100vh;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2em;
+    }
+
+    #hero h1 { font-size: 3em; animation: fadeInDown 1s ease; }
+    #hero p { font-size: 1.2em; max-width: 500px; animation: fadeInUp 1s ease; }
+
+    .cta {
+      margin-top: 1.5em;
+      padding: 0.8em 2em;
+      background: white;
+      color: var(--primary);
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.3s ease, background 0.3s;
+    }
+
+    .cta:hover {
+      transform: translateY(-3px);
+      background: #f1f1f1;
+    }
+
+    section {
+      padding: 3em 2em;
+      margin: 2em auto;
+      max-width: 1000px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px var(--shadow);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.7s ease;
+    }
+
+    section h2 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 1em;
+      font-size: 2em;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5em;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      padding: 1.2em;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    .project-card h3 { margin-top: 0; color: var(--primary); }
+    .project-card a { color: var(--primary); text-decoration: none; font-weight: bold; }
+
+    .skill { margin: 1em 0; }
+    .skill label { font-weight: 500; }
+
+    progress {
+      width: 100%;
+      height: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      appearance: none;
+    }
+
+    progress::-webkit-progress-bar { background-color: #eee; border-radius: 10px; }
+    progress::-webkit-progress-value { background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 10px; }
+
+    form { display: flex; flex-direction: column; gap: 1em; }
+    input, textarea {
+      padding: 0.8em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: border-color 0.3s;
+    }
+    input:focus, textarea:focus { outline: none; border-color: var(--primary); }
+
+    button {
+      background: var(--primary);
+      color: white;
+      padding: 0.8em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.1s ease;
+    }
+    button:hover { background: var(--secondary); }
+
+    footer { text-align: center; padding: 1.5em; background: #111; color: white; }
+    footer a { color: var(--secondary); text-decoration: none; }
+
+    .dark-mode { background: var(--bg-dark); color: var(--text-dark); }
+    .dark-mode section { background: var(--card-dark); box-shadow: none; }
+    .dark-mode .project-card { background: var(--card-dark); color: var(--text-dark); box-shadow: 0 4px 15px rgba(255,255,255,0.05); }
+    .dark-mode nav a { color: #ddd; }
+    .dark-mode nav a.active { color: var(--accent); }
+    .dark-mode header { background: rgba(15,15,20,0.9); }
+    .dark-mode footer { background: #0d0d0d; }
+
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 768px) {
+      header { flex-direction: column; text-align: center; }
+      nav { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Priyanka Sen</h1>
+    <nav>
+      <a href="#hero" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button id="theme-toggle">Dark</button>
+  </header>
+
+  <section id="hero">
+    <h1>Hello, I'm Priyanka Sen</h1>
+    <p>I build modern, elegant and efficient web experiences.</p>
+    <a href="#projects" class="cta">View My Work</a>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I'm a Student who likes to work on frontend focused on creating beautiful and functional digital experiences. I love combining creativity and logic to design smooth, user-friendly interfaces.</p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Portfolio Website</h3>
+        <p>A personal portfolio built with HTML, CSS & JS showcasing my projects and skills.</p>
+        <a href="#">🔗 View Project</a>
+      </div>
+      <div class="project-card">
+        <h3>Clone of Amazon</h3>
+        <p>Built a Clone of Amazon App using HTML5, CSS3 and Javascript.</p>
+        <a href="#">🔗 View Project</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skill">
+      <label>HTML</label>
+      <progress value="95" max="100"></progress>
+    </div>
+    <div class="skill">
+      <label>CSS</label>
+      <progress value="90" max="100"></progress>
+    </div>
+    <div class="skill">
+      <label>JavaScript</label>
+      <progress value="85" max="100"></progress>
+    </div>
+    <div class="skill">
+      <label>React / Node.js</label>
+      <progress value="80" max="100"></progress>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <form id="contact-form">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <textarea id="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Priyanka Sen. 
+    </p>
+  </footer>
+
+  <script src="p.js"></script>
+</body>
+</html>
